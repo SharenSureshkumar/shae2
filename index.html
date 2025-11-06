@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Lions — The King of Beasts</title>
+    <meta name="description" content="A simple, responsive single-page site about lions: facts, habitat, gallery and conservation." />
+    <style>
+        :root{
+            --bg:#0f1724; --card:#0b1220; --muted:#9aa7b2; --accent:#f59e0b; --glass:rgba(255,255,255,0.04);
+            --maxw:1100px;
+            color-scheme: dark;
+            font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+        }
+        *{box-sizing:border-box}
+        html,body{height:100%}
+        body{
+            margin:0;
+            background:linear-gradient(180deg,#071021 0%,#071421 40%,#04101a 100%);
+            color:#e6eef6;
+            -webkit-font-smoothing:antialiased;
+            -moz-osx-font-smoothing:grayscale;
+            line-height:1.45;
+        }
+        .container{max-width:var(--maxw);margin:0 auto;padding:1.25rem}
+        header{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1rem 0}
+        .brand{display:flex;gap:.75rem;align-items:center}
+        .logo{width:48px;height:48px;border-radius:8px;background:linear-gradient(135deg,#ffb347,#ffcc33);display:grid;place-items:center;color:#2b1a00;font-weight:700;box-shadow:0 2px 8px rgba(0,0,0,.5)}
+        nav a{color:var(--muted);text-decoration:none;margin-left:1rem;font-weight:600;font-size:.95rem}
+        nav a:hover{color:#fff}
+        .hero{
+            margin-top:.5rem;
+            display:grid;
+            grid-template-columns:1fr;
+            gap:1rem;
+            align-items:center;
+        }
+        .hero-inner{
+            background:linear-gradient(90deg, rgba(255,158,0,0.06), rgba(0,0,0,0.0));
+            border-radius:14px;padding:1.5rem;display:flex;gap:1.25rem;align-items:center;
+            box-shadow:0 6px 30px rgba(4,12,20,0.6);
+            backdrop-filter: blur(6px);
+        }
+        .hero-text h1{margin:0;font-size:clamp(1.6rem,3vw,2.4rem)}
+        .hero-text p{margin:.5rem 0;color:var(--muted)}
+        .cta{margin-top:.75rem}
+        .btn{
+            display:inline-block;padding:.5rem .9rem;border-radius:8px;background:var(--accent);color:#0b1220;font-weight:700;text-decoration:none;
+            box-shadow:0 6px 18px rgba(245,158,11,0.18);
+        }
+        .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin-top:1.25rem}
+        .card{background:var(--card);padding:1rem;border-radius:12px;border:1px solid rgba(255,255,255,0.02)}
+        .card h3{margin:0 0 .5rem 0}
+        .facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:.75rem}
+        .fact{background:var(--glass);padding:.9rem;border-radius:10px;text-align:center}
+        .fact strong{display:block;font-size:1.1rem}
+        .gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:.6rem}
+        .gallery img{width:100%;height:140px;object-fit:cover;border-radius:8px;cursor:pointer;display:block;border:2px solid rgba(255,255,255,0.03)}
+        footer{margin-top:1.5rem;padding:1rem 0;color:var(--muted);font-size:.9rem;text-align:center}
+        .small{font-size:.85rem;color:var(--muted)}
+        /* modal */
+        .modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(2,6,23,0.6);z-index:50;padding:1rem}
+        .modal.open{display:flex}
+        .modal-content{max-width:95%;max-height:90%;border-radius:12px;overflow:hidden;box-shadow:0 16px 60px rgba(2,6,23,0.8)}
+        .modal-content img{display:block;max-width:100%;max-height:90vh;height:auto}
+        .meta-row{display:flex;justify-content:space-between;align-items:center;padding:.6rem .9rem;background:rgba(0,0,0,0.3);color:var(--muted)}
+        .close-btn{background:transparent;border:0;color:var(--muted);font-weight:700;cursor:pointer;padding:.25rem .5rem}
+        /* responsive tweaks */
+        @media(min-width:820px){
+            .hero{grid-template-columns:1fr}
+            .hero-inner{padding:2rem}
+            .hero-img{width:320px;height:200px;border-radius:10px;overflow:hidden}
+            .hero-layout{display:flex;gap:1.25rem;align-items:center}
+        }
+    </style>
+</head>
+<body>
+    <div class="container" role="document">
+        <header>
+            <div class="brand">
+                <div class="logo" aria-hidden="true">L</div>
+                <div>
+                    <div style="font-weight:800">Lions</div>
+                    <div class="small">Panthera leo</div>
+                </div>
+            </div>
+            <nav aria-label="Primary">
+                <a href="#facts">Facts</a>
+                <a href="#gallery">Gallery</a>
+                <a href="#conservation">Conservation</a>
+            </nav>
+        </header>
+
+        <main>
+            <section class="hero" aria-labelledby="hero-title">
+                <div class="hero-inner" role="region" aria-roledescription="hero">
+                    <div class="hero-text">
+                        <h1 id="hero-title">Lions — The King of Beasts</h1>
+                        <p>Powerful, social big cats native to Africa and a small region of India. Learn about their behavior, habitat and how people are helping protect them.</p>
+                        <div class="cta">
+                            <a class="btn" href="#conservation">Help Protect Lions</a>
+                        </div>
+                    </div>
+                    <div class="hero-img" style="margin-left:auto">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/7/73/Lion_waiting_in_Namibia.jpg"
+                                 alt="Male lion resting in Namibia" width="320" height="200" style="width:320px;height:200px;object-fit:cover;border-radius:8px;border:1px solid rgba(255,255,255,0.03)">
+                    </div>
+                </div>
+            </section>
+
+            <section id="facts" class="grid" aria-labelledby="facts-title" style="margin-top:1.25rem">
+                <div class="card">
+                    <h3 id="facts-title">Fast Facts</h3>
+                    <div class="facts" role="list">
+                        <div class="fact" role="listitem"><strong>Social</strong><span class="small">Lions live in prides</span></div>
+                        <div class="fact" role="listitem"><strong>Top Speed</strong><span class="small">Up to 50 mph (80 km/h short bursts)</span></div>
+                        <div class="fact" role="listitem"><strong>Diet</strong><span class="small">Carnivorous predators</span></div>
+                        <div class="fact" role="listitem"><strong>Range</strong><span class="small">Sub-Saharan Africa & Gir Forest (India)</span></div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>Behavior & Hunting</h3>
+                    <p class="small">Lions are the most social of big cats. Females typically hunt cooperatively, while males defend territory. They communicate with roars, body language and scent marking.</p>
+                    <ul class="small" style="margin-top:.5rem">
+                        <li>Prides include related females, offspring and a small number of males.</li>
+                        <li>Roaring helps coordinate groups and warn rivals.</li>
+                        <li>Hunting success depends on stealth, teamwork, and timing.</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3>Habitat</h3>
+                    <p class="small">Lions prefer grasslands, savannas and open woodlands. They need sufficient prey and access to water. Human activity has fragmented many populations.</p>
+                </div>
+
+                <div class="card" id="conservation" aria-label="Conservation">
+                    <h3>Conservation</h3>
+                    <p class="small">Populations have declined due to habitat loss, human-wildlife conflict and illegal hunting. Conservation focuses on habitat protection, community programs and anti-poaching measures.</p>
+                    <p class="small" style="margin-top:.5rem">Support: local conservation NGOs, ethical tourism, and habitat corridors.</p>
+                </div>
+            </section>
+
+            <section id="gallery" style="margin-top:1.25rem">
+                <div class="card" aria-labelledby="gallery-title">
+                    <h3 id="gallery-title">Gallery</h3>
+                    <p class="small">Click an image to view full size.</p>
+                    <div class="gallery" role="list">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/7/73/Lion_waiting_in_Namibia.jpg" alt="Lion resting" data-full="https://upload.wikimedia.org/wikipedia/commons/7/73/Lion_waiting_in_Namibia.jpg" role="listitem">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/3/34/African_Lion_Panthera_leo.jpg" alt="Male lion portrait" data-full="https://upload.wikimedia.org/wikipedia/commons/3/34/African_Lion_Panthera_leo.jpg" role="listitem">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/5/55/Lioness_and_cub_%28Panthera_leo%29.jpg" alt="Lioness and cub" data-full="https://upload.wikimedia.org/wikipedia/commons/5/55/Lioness_and_cub_%28Panthera_leo%29.jpg" role="listitem">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/8/86/Lion_at_Serengeti.jpg" alt="Lions in the Serengeti" data-full="https://upload.wikimedia.org/wikipedia/commons/8/86/Lion_at_Serengeti.jpg" role="listitem">
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <div class="small">Images: Wikimedia Commons (public domain or freely licensed). This page is a simple educational demo.</div>
+        </footer>
+    </div>
+
+    <!-- Modal for image preview -->
+    <div id="lightbox" class="modal" role="dialog" aria-modal="true" aria-hidden="true">
+        <div class="modal-content" role="document">
+            <div class="meta-row">
+                <div class="small" id="img-caption">Image</div>
+                <button class="close-btn" id="close">Close ✕</button>
+            </div>
+            <img id="modal-img" alt="">
+        </div>
+    </div>
+
+    <script>
+        // Simple lightbox for gallery images
+        (function(){
+            const gallery = document.querySelectorAll('.gallery img');
+            const modal = document.getElementById('lightbox');
+            const modalImg = document.getElementById('modal-img');
+            const caption = document.getElementById('img-caption');
+            const closeBtn = document.getElementById('close');
+
+            function open(src, alt){
+                modal.classList.add('open');
+                modal.setAttribute('aria-hidden','false');
+                modalImg.src = src;
+                modalImg.alt = alt || 'Lion image';
+                caption.textContent = alt || 'Lion';
+                document.body.style.overflow = 'hidden';
+            }
+            function close(){
+                modal.classList.remove('open');
+                modal.setAttribute('aria-hidden','true');
+                modalImg.src = '';
+                document.body.style.overflow = '';
+            }
+
+            gallery.forEach(img=>{
+                img.addEventListener('click', ()=> open(img.dataset.full || img.src, img.alt));
+                img.addEventListener('keydown', (e)=> {
+                    if(e.key === 'Enter') open(img.dataset.full || img.src, img.alt);
+                });
+                img.tabIndex = 0;
+            });
+
+            closeBtn.addEventListener('click', close);
+            modal.addEventListener('click', (e)=> {
+                if(e.target === modal) close();
+            });
+            document.addEventListener('keydown', (e)=> {
+                if(e.key === 'Escape' && modal.classList.contains('open')) close();
+            });
+        })();
+    </script>
+</body>
+</html>
